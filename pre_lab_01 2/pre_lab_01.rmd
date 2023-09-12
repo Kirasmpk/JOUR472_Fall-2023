@@ -156,7 +156,7 @@ umd_courses |>
   arrange(desc(count_classes))
 ```
 
-Compared to the previous codeblock, what has changed and how did that affect the result? **Answer**
+Compared to the previous codeblock, what has changed and how did that affect the result? **Answer I'm not really sure but what I think changed is the amount of files that are being used in this line of code. I can also see that the code has started to arrange these folders by the term and department they are in.**
 
 ### Task 11: Grouping by multiple columns
 
@@ -173,7 +173,7 @@ umd_courses |>
 
 Compared to the previous codeblock, how did the output change and what in the code changed it?
 
-**Answer**
+**Answer I can tell that everything has been arranged by alphabetical order. I'm not sure if this is correct but I think the output changed by starting from the lowest value and adding it all the way up to the highest which is at the end.**
 
 ### Task 12: Other summary functions
 
@@ -189,7 +189,7 @@ umd_courses |>
   arrange(desc(total_seats))
 ```
 
-Compared to the previous codeblock, what has changed and how did that affect the result? **Answer**
+Compared to the previous codeblock, what has changed and how did that affect the result? **Answer I'm not really sure what changed, but I can see that rather than doing term and department, the code arranged everything by total seats and that changed the term order and the total seat order.**
 
 ### Task 13: different kinds of summarizations
 
@@ -207,7 +207,7 @@ umd_courses |>
   arrange(desc(total_seats))
 ```
 
-Compared to the previous codeblock, what has changed and how did that affect the result? What do the top terms have in common? **Answer**
+Compared to the previous codeblock, what has changed and how did that affect the result? What do the top terms have in common? **Answer What changed was that I can now see the mean seats for the dbl but I'm not too sure what that changed. A possible answer for what changed is the tibble. The tibble went from 22 X 3 to 22 X 5. The top terms keep the same numbers all the way through and that's what they have in common.**
 
 ### Task 14: more aggregations
 
@@ -229,7 +229,7 @@ umd_courses |>
 
 Compared to the previous codeblock, what has changed and how did that affect the result? How is the data sorted?
 
-**Answer**
+**Answer What changed was the tibble went from 22 X 5 to 212 X 5. Also the mean seats, count class, and total seats all changed to different numbers and in a different order. This affected the results by including the median seats in this dataset. The data is now sorted in order by department, count classes, total seats, mean seats, and ending with median seats.**
 
 ### Task 12: Questions
 
@@ -237,8 +237,8 @@ No code here; I want you to provide three questions that this data suggests to y
 
 **Answer**
 
-1.  
+1.  When we added task 14, why was it important to have the median seats included in this dataset?
 
-2.  
+2.  Why is it that chemistry has fewer classes but more seats compared to information studies which has more classes but less seats?
 
-3.  
+3.  Why did the tibble keep switching every time I input a new but very similar piece of code?
