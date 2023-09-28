@@ -91,8 +91,8 @@ I am sorry for the incomplete answer on question 5. I tried different codes seve
 maryland_expenses |>
   mutate(expenditure_date = mdy(expenditure_date)) |>
   mutate(month = floor_date(expenditure_date, "month")) |>
-#filter(commitee_name == 'Moore Wes For Maryland') |>
-group_by(spending_location = case_when(Location =="Maryland In-State, Out of State") |>
+  filter(commitee_name == 'Moore Wes For Maryland') |>
+  group_by(spending_location = case_when(Location =="Maryland In-State, Out of State") |>
   summarise(total_amount = sum(amount)) |>
   arrange(desc(total_amount))
 
