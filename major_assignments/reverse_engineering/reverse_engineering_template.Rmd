@@ -38,17 +38,17 @@ In this section, describe the source of the data, write a basic data dictionary 
 ```{r}
 # Load required data
 
-population_by_age <- read.csv('all_data/population-by-age.csv') |>
+population_by_age <- read.csv('data/population-by-age.csv') |>
   clean_names()
-private_enrollment_by_grade <- read.csv('all_data/private-enrollment-by-grade.csv') |>
+private_enrollment_by_grade <- read.csv('data/private-enrollment-by-grade.csv') |>
   clean_names()
-public_enrollment_by_grade <- read.csv('all_data/public-enrollment-by-grade.csv') |>
+public_enrollment_by_grade <- read.csv('data/public-enrollment-by-grade.csv') |>
   clean_names()
-missing_kids_analysis <- read.csv('all_data/Missing-Kids-Analysis.csv') |>
+missing_kids_analysis <- read.csv('data/Missing-Kids-Analysis.csv') |>
   clean_names()
-school_aged_population_changes <- read.csv('all_data/School-Aged-Population-Changes.csv') |>
+school_aged_population_changes <- read.csv('data/School-Aged-Population-Changes.csv') |>
   clean_names()
-enrollment_changes <- read.csv('all_data/Enrollment-Changes.csv') |>
+enrollment_changes <- read.csv('data/Enrollment-Changes.csv') |>
   clean_names()
 
 
@@ -71,6 +71,10 @@ In this notebook, we are reverse engineering five sentences from the story.
 ```{r}
 # Put code to reverse engineer sentence here
 
+private_enrollment_by_grade |>
+  group_by(sch_year) |>
+  summarize(count = n())
+
 # Display results of code below this codeblock
 
 ```
@@ -82,6 +86,12 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ```{r}
 # Put code to reverse engineer sentence here
+
+school_aged_population_changes |>
+  group_by(census_population_4_1_2020) |>
+  group_by(census_population_7_1_2020) |>
+  group_by(census_population_7_1_2021) 
+
 
 # Display results of code below this codeblock
 
