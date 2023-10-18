@@ -44,13 +44,12 @@ You will need to read in and clean up the data so that it can be used for analys
 
 ```{r}
 
-baltco_911_overdose_calls <- read_csv("lab_05/tabula-Baltimore County; Carey, Samantha log OD (2).csv", col_names = FALSE)
+baltco_911_overdose_calls <- read_csv("tabula-Baltimore County; Carey, Samantha log OD (2).csv", col_names = FALSE)
 
 baltco_911_overdose_calls <-
 baltco_911_overdose_calls |>
-  rename(date = X1, time = X2, case_number = X3, event_type = X4, location = X5) |>
+    rename( DAT_FORMAT= X1, DAT_FORMCAATSE_NBR = X2, CASE_NBR = X3, EVTYP = X4, LOC = X5) |>
   mutate(date = mdy(date))
-                                      
 
 ```
 
