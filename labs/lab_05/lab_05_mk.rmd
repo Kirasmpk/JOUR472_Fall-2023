@@ -48,8 +48,8 @@ baltco_911_overdose_calls <- read_csv("tabula-Baltimore County; Carey, Samantha 
 
 baltco_911_overdose_calls <-
 baltco_911_overdose_calls |>
-    rename( DAT_FORMAT= X1, DAT_FORMCAATSE_NBR = X2, CASE_NBR = X3, EVTYP = X4, LOC = X5) |>
-  mutate(date = mdy(date))
+  rename( DAT_FORMAT= X1, DAT_FORMCAATSE_NBR = X2, CASE_NBR = X3, EVTYP = X4, LOC = X5) |>
+  mutate(date = mdy(date))  
 
 ```
 
