@@ -72,6 +72,8 @@ Q2. You want to understand if there's a pattern in the day of the week that over
 
 A2.
 
+I found that the 7th day of the week had the highest count of overdoses with the highest percentage total. Coming in second was the first day of the week with slightly lower numbers with 621 overdoes and .4 less percentage total. The third was the 6th day of the week where it had 615 overdoses and a percentage of 14.95 percent.
+
 ```{r}
 baltco_911_overdose_calls <-
   baltco_911_overdose_calls|>
@@ -90,9 +92,11 @@ Q3. Now let's look at locations. Which ones have the most calls? How would you d
 
 A3.
 
+4540 Silver Spring had the most calls with 36. This is a little strange because this number is significantly higher than any of the other numbers listed below. The next two are police precincts which is quite interesting because those aren't actual locations of the call but it could be possible they are? The event column is describing two different things that did occur at the same time, location, and date. It's possible that these calls are not separate and that the calls we're getting are fewer and more unique.
+
 ```{r}
 baltco_911_overdose_calls |>
-  group_by(location) |>
+  group_by(LOC) |>
   summarize(count = n()) |>
   arrange(desc(count))
 ```
@@ -100,3 +104,5 @@ baltco_911_overdose_calls |>
 Q4. What's the best story idea or question you've seen as a result of the work you've done in this lab?
 
 A4.
+
+The best story idea that I've seen as a result of the work is that Silver Spring had significantly higher overdose calls than anyone else in the dataset above.
