@@ -73,7 +73,8 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 private_enrollment_by_grade |>
   group_by(sch_year) |>
-  summarize(count = n())
+  summarize(count = n()) |>
+filter(count > 400)
 
 # Display results of code below this codeblock
 
@@ -94,7 +95,8 @@ school_aged_population_changes |>
   group_by(census_population_7_1_2020) |>
   group_by(census_population_7_1_2021) |>
   summarize(count = n()) |>
-filter(count > 1)
+filter(count > 1) 
+
 
 # Display results of code below this code block
 
