@@ -44,12 +44,12 @@ You will need to read in and clean up the data so that it can be used for analys
 
 ```{r}
 
-baltco_911_overdose_calls <- read_csv("tabula-Baltimore County; Carey, Samantha log OD (3).csv", col_names = FALSE)
+baltco_911_overdose_calls <- read_csv("tabula-Baltimore County; Carey, Samantha log OD (3).csv")
 
-baltco_911_overdose_calls <-
-baltco_911_overdose_calls |>
-  rename( DATFORMAT= X1, DATFORMCAATSE_NBR = X2, CASENBR = X3, EVTYP = X4, LOC = X5) |>
-  mutate(date = mdy(date))  
+#baltco_911_overdose_calls <- baltco_911_overdose_calls |> rename( DATFORMAT= X1, DATFORMCAATSE_NBR = X2, CASENBR = X3, EVTYP = X4, LOC = X5) |> mutate(date = mdy(date))  
+
+
+baltco_911_overdose_calls <- baltco_911_overdose_calls |> mutate(DATFORMAT = mdy(DATFORMAT))  
 
 ```
 
@@ -59,9 +59,11 @@ Q1. Write code to generate the number of calls that occurred on each date. Which
 
 A1.
 
+July 14th and October 4 both had 23 overdose calls. This dataset has 366 records that range from Feb. 6, 2022 to Feb. 6, 2023. This tells me that there were zero days during that time period with overdose calls.
+
 ```{r}
 baltco_911_overdose_calls |>
-  group_by(LOC) |>
+  group_by(DATFORMAT) |>
   summarize(count = n()) |>
   arrange(desc(count))
 ```
@@ -73,7 +75,7 @@ A2.
 ```{r}
 baltco_911_overdose_calls <-
   baltco_911_overdose_calls|>
-  mutate(day_of_week = wday(date))
+  mutate(day_of_week = wday(DATFORMAT))
 
 baltco_911_overdose_calls |>
   group_by(day_of_week) |>

@@ -131,6 +131,9 @@ enrollment_changes |>
 ```{r}
 # Put code to reverse engineer sentence here
 
+school_aged_population_changes
+
+
 school_aged_population_changes |> 
   group_by(census_population_4_1_2020) |>
   group_by(census_population_7_1_2020) |>
