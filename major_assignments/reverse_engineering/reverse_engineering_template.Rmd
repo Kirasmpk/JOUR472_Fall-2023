@@ -85,6 +85,8 @@ filter(count > 400)
 -   **Sentence text**: [Paste in sentence to engineer here]
 -   **Analysis summary**: [Write up two to three sentences describing the results of your analysis. Were you able to confirm the finding? If not, why not?]
 
+I am trying to input the CSV files in the code so that it can read the data that I need it to read. By doing this, I will be able to code in the sentence that I am currently working on.
+
 ```{r}
 # Put code to reverse engineer sentence here
 
