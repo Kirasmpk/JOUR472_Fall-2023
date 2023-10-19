@@ -93,7 +93,8 @@ school_aged_population_changes |>
   group_by(census_population_4_1_2020) |>
   group_by(census_population_7_1_2020) |>
   group_by(census_population_7_1_2021) |>
-  summarize(count = n())
+  summarize(count = n()) |>
+filter(count > 1)
 
 # Display results of code below this code block
 
@@ -108,6 +109,15 @@ school_aged_population_changes |>
 
 ```{r}
 # Put code to reverse engineer sentence here
+
+enrollment_changes |>
+  group_by(enrollment_type) |>
+  filter(enrollment_type == 'Public school enrollment') |>
+  filter(state_abbrev == 'CA') |>
+  mutate(school_year_2019_20_national = sum(school_year_2019_20)) |>
+  mutate(school_year_2020_2021_national = sum(school_year_2020_2021)) |>
+  mutate(school_year_2021_22_national = sum(school_year_2021_22)) |>
+  mutate(national_public_school_change = school_year_2021_22_national-school_year_2019_20_national)
 
 # Display results of code below this codeblock
 
