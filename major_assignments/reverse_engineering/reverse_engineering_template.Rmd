@@ -90,12 +90,12 @@ filter(count > 400)
 
 # Put code to reverse engineer sentence here
 
-school_aged_population_changes |>
+school_aged_population_changes |> 
   group_by(census_population_4_1_2020) |>
   group_by(census_population_7_1_2020) |>
   group_by(census_population_7_1_2021) |>
   summarize(count = n()) |>
-filter(count > 1) 
+  filter(count > 1) 
 
 
 # Display results of code below this code block
