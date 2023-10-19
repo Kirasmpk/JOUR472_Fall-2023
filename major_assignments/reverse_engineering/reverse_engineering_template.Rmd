@@ -141,6 +141,7 @@ school_aged_population_changes |>
   summarize(count = n()) |>
   filter(count > 1) 
 
+
 # Display results of code below this codeblock
 
 ```
