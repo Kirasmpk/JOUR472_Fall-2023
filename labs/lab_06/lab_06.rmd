@@ -84,20 +84,19 @@ combined_911 |>
 
 Where are those zip codes in the city?
 
-Add a column to your code that calculates the number of calls per 1,000 people for those zip codes. To calculate a per capita rate, you might find this short guide handy: [https://observablehq.com/\@palewire/per-capita-calculator](https://observablehq.com/@palewire/per-capita-calculator){.uri}.
+Add a column to your code that calculates the number of calls per 1,000 people for those zip codes. To calculate a per capita rate, you might find this short guide handy: [https://observablehq.com/\@pale](https://observablehq.com/@palewire/per-capita-calculator){.uri} [wire/per-capita-calculator](https://observablehq.com/@palewire/per-capita-calculator){.uri}.
 
 Which zip code has the highest rate of calls per 1,000 people? Find the neighborhoods in that zip code that are listed in the data - you can use group_by or distinct to do this. What are some of those neighborhoods, and what else can you tell me about the population there?
 
 A3.
 
 ```{r}
-combined_911 |>
-  mutate(month = month(date)) |>
-  group_by(county, month) |>
-  summarize(total_calls = n()) |>
-  left_join(population_data, by = "county") |>
-  mutate(calls_per_1000_people = (total_calls / population) * 1000)
-
+baltimore_911_with_demographics |>
+filter(pct_under_18 > 75) |>
+  group_by(zip_code, population) |>
+  summarise(call_number = n()) |>
+  mutate(calls_percapita = (call_number/population)) |>
+  arrange(desc(calls_percapita))
 ```
 
 ### Q4. Choose your own adventure: I want you to come up with a question you could ask of the Baltimore City data that combines both the calls and the demographic information. You must use both demographics and the overdose call data in your work.
