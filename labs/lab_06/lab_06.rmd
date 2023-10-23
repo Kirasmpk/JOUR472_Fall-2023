@@ -91,6 +91,12 @@ Which zip code has the highest rate of calls per 1,000 people? Find the neighbor
 A3.
 
 ```{r}
+combined_911 |>
+  mutate(month = month(date)) |>
+  group_by(county, month) |>
+  summarize(total_calls = n()) |>
+  left_join(population_data, by = "county") |>
+  mutate(calls_per_1000_people = (total_calls / population) * 1000)
 
 ```
 
@@ -99,4 +105,5 @@ A3.
 A4:
 
 ```{r}
+
 ```
