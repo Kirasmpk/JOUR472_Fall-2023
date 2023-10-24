@@ -148,7 +148,7 @@ school_age_change <- school_aged_population_changes |>
   filter(state == 'California' | state == 'New York') |>
   select(state,change_in_school_aged_population_5_17)
 
-enrollment_changes_ca_ny |>
+age_enrollment_change <- enrollment_changes_ca_ny |>
   inner_join(school_age_change, by = 'state')
 
 
