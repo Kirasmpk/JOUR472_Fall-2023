@@ -131,14 +131,25 @@ enrollment_changes |>
 ```{r}
 # Put code to reverse engineer sentence here
 
-school_aged_population_changes
+public_enrollment_changes <- enrollment_changes |>
+  #group_by(enrollment_type) |>
+  filter(enrollment_type == 'Public school enrollment') |>
+  filter(state_abbrev == 'CA' | state_abbrev == 'NY')
 
-school_aged_population_changes |> 
-  group_by(census_population_4_1_2020) |>
-  group_by(census_population_7_1_2020) |>
-  group_by(census_population_7_1_2021) |>
-  summarize(count = n()) |>
-  filter(count > 1) 
+non_public_enrollment_changes <- enrollment_changes |>
+  filter(enrollment_type == 'Total nonpublic enrollment (private + homeschool)') |>
+  filter(state_abbrev == 'CA' | state_abbrev == 'NY') |> 
+  select(state,total_change)
+
+enrollment_changes_ca_ny <- non_public_enrollment_changes |>
+  inner_join(public_enrollment_changes, by = 'state')
+
+school_age_change <- school_aged_population_changes |> 
+  filter(state == 'California' | state == 'New York') |>
+  select(state,change_in_school_aged_population_5_17)
+
+enrollment_changes_ca_ny |>
+  inner_join(school_age_change, by = 'state')
 
 
 # Display results of code below this codeblock
