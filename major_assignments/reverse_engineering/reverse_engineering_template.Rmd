@@ -152,7 +152,7 @@ school_age_change <- school_aged_population_changes |>
   select(state,change_in_school_aged_population_5_17)
 
 age_enrollment_change <- enrollment_changes_ca_ny |>
-  inner_join(school_age_change, by = 'state')
+  inner_join(school_age_change, by = 'state') |>
 rename(public_enrollment_change = total_change.x) |>
 rename(nonpublic_enrollment_change = total_change.y)
 
