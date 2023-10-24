@@ -90,6 +90,8 @@ Which zip code has the highest rate of calls per 1,000 people? Find the neighbor
 
 A3.
 
+The zip codes in the city are 21217, 21223, 21201, 21202, 21205, 21213, and 21216. The zip code with the highest call number is 21217 and the one with the lowest is 21205. Druid Heights, Carrollton Ridge, Belair-Edison, and Walbrook are a few of the neighborhoods listed below. The population in these neighborhoods is pridomonetly black.
+
 ```{r}
 baltimore_911_with_demographics |>
 filter(pct_under_18 > 75) |>
@@ -103,6 +105,13 @@ filter(pct_under_18 > 75) |>
 
 A4:
 
-```{r}
+I was interested to see the exact opposite of Q3. What I learned from this data set is that the highest call volume is 500 call numbers in the zip code 21215 and the lowest is 21251.
 
+```{r}
+baltimore_911_with_demographics |>
+filter(pct_under_18 < 75) |>
+  group_by(zip_code, population) |>
+  summarise(call_number = n()) |>
+  mutate(calls_percapita = (call_number/population)) |>
+  arrange(desc(calls_percapita))
 ```
