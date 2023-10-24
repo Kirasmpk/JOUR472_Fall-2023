@@ -240,6 +240,8 @@ The Census Bureau has Zip Code Tabulation Areas - they are mostly identical to w
 
 **Answer**
 
+One question that we could ask of this data is what is the race breakdown of each of the enrollment percentages. What might make the answer hard to interpret is the official number because the ACS can't fully count every person, especially ones who don't want to report their information.
+
 ```{r}
 md_zipcodes <- get_acs(geography="zcta", variables = "B19013_001", state='MD', year=2019)
 md_high_schools_with_acs <- md_high_schools |> left_join(md_zipcodes, by=c('zip'='GEOID'))
@@ -249,6 +251,8 @@ md_high_schools_with_acs <- md_high_schools_with_acs |> mutate(min=(estimate-moe
 **Task** Let's look at the average household income for high schools that have 60% or more graduates immediately enrolling in college, and then look at those with less than 40%. Write a sentence describing the results.
 
 **Answer**
+
+More than 60% of high school graduates are enrolled and have an average income of 111,448.3 dollars. The count for this is 50. Less than 40% of high school graduates are enrolled and have an average income of 69,252.24 dollars. The count for this is 76.
 
 ```{r}
 md_high_schools_with_acs |>
@@ -263,3 +267,5 @@ md_high_schools_with_acs |>
 **Task** What is another question you could ask of this data?
 
 **Answer**
+
+We could ask this data about a specific ethnicity and the total count of how much money that ethnicity makes on average within this data set.
