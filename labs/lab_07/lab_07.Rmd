@@ -89,6 +89,8 @@ Which zip code has the highest rate of calls? Which has the lowest?
 
 **A3**
 
+The zip code 20877 had the highest count with 1.70125893. The one with the lowest was 20707 with 0.03985016.
+
 ```{r}
 moco_911_calls <- read_csv('data/montgomery_2022_overdoses.csv') |>
 mutate(zip = as.character(zip))
