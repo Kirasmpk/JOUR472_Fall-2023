@@ -114,9 +114,36 @@ moco_join_pop_calls <- moco_join_pop_calls |> mutate(rate_per_1k = (count/estima
 
 **A4**
 
+The zip code 20877 had the highest count with 1.70125893. The one with the lowest was 20707 with 0.03985016. There are a few close similarities being the age for 20877 is 37.6 while the age for 20707 is 38. The percentage of male to female is also pretty close with 20877 having it split 50-50 and 20707 having 53-47 in favor of women. A big difference between these two is that 20877 has a 21% White population, a 18% Black population, a 16% Asian population, and a 42% Hispanic population compared to 20707 having a 22% White population, a 45% Black population, a 11% Asian population, and a 16% Hispanic population. I think the story here would be the diverse backgrounds that these two zip codes have and how in one, the majority of people are black while the other zip code has a majority of Hispanic people.
+
 **Q5** Go back to your joined dataframe from Q3 and add two more columns representing the minimum and maximum populations based on the estimate and margin of error, then calculate per capita rates for each. Do you get the same two zip codes for the highest and lowest as you did before? Does that give you more or less confidence in your answers to Q3?
 
 **A5**
 
+I did get the same two zip codes that I got in A3. Highest is still 20877 and lowest is still 20707. I think since I got this answer twice it gives me more confidence to my Q3 because it just reinforces what I had previously believed.
+
 ```{r}
+moco_911_calls <- read_csv('data/montgomery_2022_overdoses.csv') |>
+mutate(zip = as.character(zip))
+
+moco_911_calls_per_zip <- moco_911_calls |> group_by(zip) |> summarize(count = n())
+
+md_pop_zcta <- get_acs(
+  geography = 'zcta' , 
+  variables = 'B09021_001', 
+  year = 2019, 
+  state='MD')
+
+moco_join_pop_calls <- moco_911_calls_per_zip |> inner_join(md_pop_zcta, by=c('zip' = 'GEOID'))
+
+moco_join_pop_calls <- moco_join_pop_calls |> mutate(rate_per_1k = (count/estimate)*1000) |> arrange(desc(rate_per_1k))
+
+moco_join_pop_calls <- moco_join_pop_calls |>
+  mutate(
+    min_population = estimate - moe,
+    max_population = estimate - moe,
+    rate_per_1k = (count / estimate) * 1000) |>
+  arrange(desc(rate_per_1k))
 ```
+
+\
