@@ -80,6 +80,7 @@ enrollment_changes |>
   mutate(school_year_2021_22_21states = sum(school_year_2021_22)) |>
   mutate(public_school_change_21states = school_year_2021_22_21states-school_year_2019_20_21states) 
 
+
 # Display results of code below this codeblock
 
 ```
