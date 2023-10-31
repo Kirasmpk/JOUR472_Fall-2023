@@ -28,6 +28,7 @@ Loading required libraries for this analysis.
 library(tidyverse)
 library(janitor)
 library(lubridate)
+options(scipen=999)
 
 ```
 
@@ -80,7 +81,6 @@ enrollment_changes |>
   mutate(school_year_2021_22_21states = sum(school_year_2021_22)) |>
   mutate(public_school_change_21states = school_year_2021_22_21states-school_year_2019_20_21states) 
 
-
 # Display results of code below this codeblock
 
 ```
@@ -117,7 +117,6 @@ enrollment_changes |>
   mutate(homeschool_year_21_22 = sum(school_year_2021_22)) |>
   mutate(total_homeschool_change = homeschool_year_21_22 - homeschool_year_19_20) |> 
   summarize(sum(total_change))
-
 
 
 # Display results of code below this code block
