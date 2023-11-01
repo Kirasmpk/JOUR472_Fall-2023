@@ -66,8 +66,8 @@ In this notebook, we are reverse engineering five sentences from the story.
 
 ### Sentence 1
 
--   **Sentence text**: [Paste in sentence to engineer here]
--   **Analysis summary**: [Write up two to three sentences describing the results of your analysis. Were you able to confirm the finding? If not, why not?]
+-   **Sentence text**: "Overall, public school enrollment fell by over 700,000 students between the 2019-2020 and 2021-2022 school years in the 21 states plus Washington, D.C., that provided the necessary data."
+-   **Analysis summary**: We utilized data from the data set 'enrollment_changes' and compared it to the data set 'missing_kids_analysis'. We were able to find the number of children who left public schools between the 2019-2020 and 2021-2022 school years, and it matched the number featured in the story.
 
 ```{r}
 # Put code to reverse engineer sentence here
@@ -87,8 +87,8 @@ enrollment_changes |>
 
 ### Sentence 2
 
--   **Sentence text**: [Paste in sentence to engineer here]
--   **Analysis summary**: [Write up two to three sentences describing the results of your analysis. Were you able to confirm the finding? If not, why not?]
+-   **Sentence text**: "Those states saw private-school enrollment grow by over 100,000 students. Home-schooling grew even more, surging by more than 180,000" from 2019-2020 to 2021-2022."
+-   **Analysis summary**: We used the enrollment_changes data set to find the differences is private/homeschooled kids between the 2019 school year and the 2021 school year, confirming the private school enrollment did grow by over 100,000 students and home-schooling did grow by over 180,000 students.
 
 I am trying to input the CSV files in the code so that it can read the data that I need it to read. By doing this, I will be able to code in the sentence that I am currently working on.
 
@@ -127,8 +127,8 @@ enrollment_changes |>
 
 ### Sentence 3
 
--   **Sentence text**: [Paste in sentence to engineer here]
--   **Analysis summary**: [Write up two to three sentences describing the results of your analysis. Were you able to confirm the finding? If not, why not?]
+-   **Sentence text**: "California alone showed over 150,00 missing student in the data, and New York had nearly 60,000."
+-   **Analysis summary**:
 
 ```{r}
 # Put code to reverse engineer sentence here
