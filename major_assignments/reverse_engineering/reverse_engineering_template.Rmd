@@ -159,7 +159,7 @@ age_enrollment_change <- enrollment_changes_ca_ny |>
 
 ### Sentence 4
 
--   **Sentence text**: [Paste in sentence to engineer here]
+-   **Sentence text**: "An analysis by The Associated Press, Stanford Univeristy's Big Local News project and Stanford education professor Thomas Dee found an estimated 230,000 students in 21 states whose absences could not be accounted for."
 -   **Analysis summary**: [Write up two to three sentences describing the results of your analysis. Were you able to confirm the finding? If not, why not?]
 
 ```{r}
@@ -171,7 +171,7 @@ age_enrollment_change <- enrollment_changes_ca_ny |>
 
 ### Sentence 5
 
--   **Sentence text**: [Paste in sentence to engineer here]
+-   **Sentence text**: "The population of school-age kids in the states we studied fell by about 183,000 according to census estimates."
 -   **Analysis summary**: [Write up two to three sentences describing the results of your analysis. Were you able to confirm the finding? If not, why not?]
 
 ```{r}
