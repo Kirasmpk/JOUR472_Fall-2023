@@ -129,4 +129,5 @@ To answer this question, do the following:
 **A3.**
 
 ```{r}
+md_median_income_zip <- get_acs(geography = 'zcta', variables = 'B19013_001', state='MD', year=2019)
 ```
