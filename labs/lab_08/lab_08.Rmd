@@ -143,6 +143,7 @@ md_pop_zcta <- get_acs(
 
 md_median_income_zip |>
   inner_join(pg_call, by=c('zipcode' = 'GEOID')
-          
+             
+             
              
 ```
