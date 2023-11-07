@@ -131,7 +131,7 @@ To answer this question, do the following:
 ```{r}
 md_median_income_zip <- get_acs(geography = 'zcta', variables = 'B19013_001', state='MD', year=2019)
 
-pg_call <- get_acs(
+pg_calls <- get_acs(
   geography = 'zipcode',
   variables = 'incident'
 )
@@ -141,9 +141,7 @@ md_pop_zcta <- get_acs(
   variables = 'B09021_001'
 )
 
-md_median_income_zip |>
-  inner_join(pg_call, by=c('zipcode' = 'GEOID')
-             
-             
-             
+combined_md_zip <- md_median_income_zip |>
+  left_join(pg_calls, by=c('zipcode' = 'GEOID'))
+
 ```
