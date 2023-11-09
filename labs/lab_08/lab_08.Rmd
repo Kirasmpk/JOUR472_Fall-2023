@@ -130,14 +130,17 @@ To answer this question, do the following:
 
 ```{r}
 
+#1 Generate a dataframe with the number of 911 calls for each zip code.
 calls_per_zipcode <- pg_calls |>
   group_by(zipcode) |>
   summarize(total_calls = n())
 
 colnames(zip_counts) <- c("zipcode", "total_calls")
 
+#2 Get data from the Census Bureau showing median household income for Maryland zip codes.
 md_median_income_zip <- get_acs(geography = 'zcta', variables = 'B19013_001', state='MD', year=2019)
 
+#3 Join those two dataframes on their zip code columns, starting with the 911 calls dataframe.
 combined <- calls_per_zipcode |>
   left_join(md_median_income_zip, by = c("zipcode" = "GEOID"))
 
@@ -146,6 +149,6 @@ scatterplot <- ggplot(data = result_df, aes(x = estimate, y = total_calls, label
   x = "Median Income",
   y = "Total 911 Calls",
   caption = "source: Census Bureau")
-)
+
 
 ```
