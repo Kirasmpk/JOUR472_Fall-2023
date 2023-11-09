@@ -128,6 +128,8 @@ To answer this question, do the following:
 
 **A3.**
 
+The relationship that median incomes have to the number of overdose 911 calls is that zip codes within the the 75000 median income range have a significant amount of calls compared to any other median income group. I see that 75000 has the most amount of calls and 50000 has the least amount with one call. The way that I would report the main point of this chart is by stating that people with a median income of 75000 have the most amount of 911 calls.
+
 ```{r}
 
 #1 Generate a dataframe with the number of 911 calls for each zip code.
@@ -144,11 +146,11 @@ md_median_income_zip <- get_acs(geography = 'zcta', variables = 'B19013_001', st
 combined <- calls_per_zipcode |>
   left_join(md_median_income_zip, by = c("zipcode" = "GEOID"))
 
-scatterplot <- ggplot(data = result_df, aes(x = estimate, y = total_calls, label = zipcode)) + geom_point(na.rm = TRUE) + geom_text(check_overlap = TRUE, angle = 45, hjust = -.1, size = 3.5) + labs(
+scatterplot <- ggplot(data = combined, aes(x = estimate, y = total_calls, label = zipcode)) + geom_point(na.rm = TRUE) + geom_text(check_overlap = TRUE, angle = 45, hjust = -.1, size = 3.5) + labs(
   title = "Median Income vs. Total 911 Calls", 
   x = "Median Income",
   y = "Total 911 Calls",
   caption = "source: Census Bureau")
 
-
+scatterplot
 ```
