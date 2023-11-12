@@ -51,7 +51,7 @@ add the URL of your chart.
 **A1.**
 
 ```{r}
-
+md_gov_county.csv <- read_csv("data/md_gov_county_18.csv") |> 
 ```
 
 **Q2.** You're interested in seeing how the methods of voting have
