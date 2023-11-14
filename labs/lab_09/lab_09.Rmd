@@ -144,6 +144,13 @@ more about? Put the answer below along with the URL of your map.
 
 **A3.**
 
+The story here is that Germantown, North Bethesda, and Rockville are
+leading Montgomery in overdose calls in 2022. I want to know why these
+areas have the highest while areas such as Poolesville have a low rate
+of calls.
+
+<https://datawrapper.dwcdn.net/aGmkL/1/>
+
 ```{r}
 moco_2022_overdoses <- read_csv("data/montgomery_2022_overdoses.csv") |> 
   clean_names()
@@ -154,4 +161,6 @@ zipcode_calls <- moco_2022_overdoses |>
 
 zipcode_calls <- zipcode_calls |>
   mutate(pct_of_calls = (total_calls/sum(total_calls))*100)
+
+write_csv(zipcode_calls, "data/zipcode_calls.csv")
 ```
