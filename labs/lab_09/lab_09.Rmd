@@ -24,6 +24,8 @@ for this lab.
 
 ```{r}
 # load libraries here
+library(tidyverse)
+library(janitor)
 ```
 
 ## Questions
@@ -51,7 +53,22 @@ add the URL of your chart.
 **A1.**
 
 ```{r}
-md_gov_county.csv <- read_csv("data/md_gov_county_18.csv") |> 
+md_gov_county_2022 <- read_csv("data/md_gov_county.csv")
+md_gov_county_2018 <- read_csv("data/md_gov_county_18.csv")
+
+md_gov_comparison <- md_gov_county_2018 |>
+  left_join(md_gov_county_2022, by = c("GEOID"))
+  
+  colnames(md_gov_comparison) <- c("zipcode" , "county 2018" , "Hogan 2018" , "Jealous 2018" , "Quinn 2018", "Schlakman 2018" , "Write-Ins 2018" , "county 2022" , "Cox 2022" , "Moore 2022" , "Lashar 2022" , "Wallace 2022" , "Harding 2022" , "Sefcik 2022" , "Write-Ins 2022")
+  
+md_gov_comparison <- md_gov_comparison |>
+mutate(total_votes = `Cox 2022` + `Moore 2022` + `Lashar 2022` + `Wallace 2022` + `Harding 2022` + `Sefcik 2022` + `Write-Ins 2022`, pct_Cox = (`Cox 2022`/total_votes*100))
+  
+  md_gov_comparison <-  md_gov_comparison |>
+    mutate(total_votes_2018 = `Hogan 2018` + `Jealous 2018` + `Quinn 2018` + `Schlakman 2018` + `Write-Ins 2018`, pct_Hogan = (`Hogan 2018`/total_votes_2018*100))
+  
+write_csv(md_gov_comparison, "data/md_gov_comparison.csv")
+
 ```
 
 **Q2.** You're interested in seeing how the methods of voting have
@@ -73,6 +90,7 @@ URL of your chart.
 **A2.**
 
 ```{r}
+
 ```
 
 **Q3.** You want to know more about the geography of 911 overdose calls
@@ -100,4 +118,5 @@ more about? Put the answer below along with the URL of your map.
 **A3.**
 
 ```{r}
+
 ```
