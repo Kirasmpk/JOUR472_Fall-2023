@@ -96,6 +96,14 @@ URL of your chart.
 
 **A2.**
 
+The story here is the percentage change throughout the years for the
+number of people who choose to do mail-in votes. Due to COVID-19 the
+percent of mail-in votes skyrocketed, but after COVID-19 a good chunk of
+people still choose to mail-in their votes rather than voting on the
+Early day and on Election day.
+
+<https://datawrapper.dwcdn.net/vCQlJ/1/>
+
 ```{r}
 
 md_votes_by_type <- read_csv("data/md_votes_by_type.csv")
@@ -109,7 +117,7 @@ md_votes_by_type <- md_votes_by_type |>
 md_votes_by_type <- md_votes_by_type |>
   mutate(total_votes = Early + `Election Day` + Mail, Pct_Mail = (Mail/total_votes)*100)
 
-write_csv(md_votes_by_type, "data'md_type_by_type.csv")
+write_csv(md_votes_by_type, "data/md_votes_by_type.csv")
 ```
 
 **Q3.** You want to know more about the geography of 911 overdose calls
