@@ -148,9 +148,10 @@ more about? Put the answer below along with the URL of your map.
 moco_2022_overdoses <- read_csv("data/montgomery_2022_overdoses.csv") |> 
   clean_names()
 
-moco_2022_overdoses |>
+zipcode_calls <- moco_2022_overdoses |>
   group_by(zip) |>
   summarize(total_calls = n())
 
-
+zipcode_calls <- zipcode_calls |>
+  mutate(pct_of_calls = (total_calls/sum(total_calls))*100)
 ```
