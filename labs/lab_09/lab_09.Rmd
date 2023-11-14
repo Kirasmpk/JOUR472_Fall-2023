@@ -97,20 +97,19 @@ URL of your chart.
 **A2.**
 
 ```{r}
-md_gov_county_2018 <- read_csv("data/md_gov_county_18.csv")
 
-md_votes_data <- read.csv("md_votes_by_type.csv")
+md_votes_by_type <- read_csv("data/md_votes_by_type.csv")
 
-str(md_votes_data)
+md_votes_by_type <- md_votes_by_type |>
+  mutate(total_votes = Early + `Election Day` + Mail, Pct_Early = (Early/total_votes)*100)
 
-ggplot(md_votes_data, aes(x = as.factor(Year), fill = variable, y = value)) +
-  geom_bar(position = "stack", stat = "identity") +
-  labs(title = "Percentage of Votes by Type in Maryland (2018, 2020, 2022)",
-       x = "Year",
-       y = "Percentage of Votes") +
-  scale_fill_manual(values = c("Early_Voting" = "blue", "Election_Day" = "red", "Mail" = "green")) +
-  theme_minimal()
+md_votes_by_type <- md_votes_by_type |>
+  mutate(total_values = Early + `Election Day` + Mail, Pct_Election_Day = (`Election Day`/total_votes)*100)
 
+md_votes_by_type <- md_votes_by_type |>
+  mutate(total_votes = Early + `Election Day` + Mail, Pct_Mail = (Mail/total_votes)*100)
+
+write_csv(md_votes_by_type, "data'md_type_by_type.csv")
 ```
 
 **Q3.** You want to know more about the geography of 911 overdose calls
