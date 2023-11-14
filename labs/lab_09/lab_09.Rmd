@@ -145,5 +145,12 @@ more about? Put the answer below along with the URL of your map.
 **A3.**
 
 ```{r}
+moco_2022_overdoses <- read_csv("data/montgomery_2022_overdoses.csv") |> 
+  clean_names()
+
+moco_2022_overdoses |>
+  group_by(zip) |>
+  summarize(total_calls = n())
+
 
 ```
