@@ -52,6 +52,13 @@ add the URL of your chart.
 
 **A1.**
 
+I made a bar chart because I thought that it was the easiest way to
+display all of the data that I had. It made more sense to me when
+looking at the data compared to all of the other charts that I had
+previously looked at.
+
+<https://datawrapper.dwcdn.net/y4VdB/1/>
+
 ```{r}
 md_gov_county_2022 <- read_csv("data/md_gov_county.csv")
 md_gov_county_2018 <- read_csv("data/md_gov_county_18.csv")
