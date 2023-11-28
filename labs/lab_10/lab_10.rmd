@@ -36,6 +36,8 @@ Get the geometry for Maryland's counties using tigris and, joining that datafram
 
 **A1.**
 
+The story here is that most of the counties in the state of Maryland are somewhere between 2.5 and 5 in their difference. When looking at the data, I can see that the votes were not too far off from one another. The most interesting county is the one that is colored tan and in the 0 margin difference. There are two of them but one is much bigger than that other one and I find the bigger one to be more interesting.
+
 ```{r}
 #Calculate percentages for both candidates and the difference between them per county
 
@@ -79,6 +81,8 @@ ggplot() +
 
 **A2.**
 
+The potential story here is that Talbot county is the only county in the 1500 rate while every single other county is in the 500 rate. Given access to other months' outage data, the next steps would be to compare them to this months data and see what changes occurred and where. By doing this, a story can be told and we can figure out why the outages are closely linked together.
+
 ```{r}
 #Read data and calculate rate of outages per customer
 
@@ -107,7 +111,7 @@ theme_minimal() +
   scale_fill_gradient()
 ```
 
-**Q3.** You've been assigned a story about the use of electric vehicles in Maryland and you want to make a map of the prevalence of electric vehicles in each county. Load the `ev_2020_2023.csv` file, which has the number of electric and hybrid vehicles per county from July 2020 and March 2023 and calculate a percentage change for each county (remember, that's `new-old/old`). Using the Maryland counties dataframe you made for Q1, make a county map showing the percentage change.What counties stand out to you? What questions do you have about the changes you're seeing?
+**Q3.** You've been assigned a story about the use of electric vehicles in Maryland and you want to make a map of the prevalence of electric vehicles in each county. Load the `ev_2020_2023.csv` file, which has the number of electric and hybrid vehicles per county from July 2020 and March 2023 and calculate a percentage change for each county (remember, that's `new-old/old`). Using the Maryland counties dataframe you made for Q1, make a county map showing the percentage change. What counties stand out to you? What questions do you have about the changes you're seeing?
 
 Next, use tidycensus to retrieve county population data for Maryland from 2021 (you did this in the pre_lab) and join it to your vehicles dataframe. HINT: you may not need to join it on the county name, and you should already have the geometry!
 
@@ -117,32 +121,62 @@ Finally, make a second county map showing the per capita rate. What counties sta
 
 **A3.**
 
+In the first map, the counties that stand out to me are Caroline, Somerset, Charles, Anne Arundel and Allegany. Caroline stands out to me because it's the only county in the 400 range. Somerset, Charles, Anne Arundel and Allegany stand out to me because they're the only counties in the 200-300 range while every other county is in the 200 range and blow. I am questioning why Caroline is the only county in the 400 range while every county is below that. In the second map, the counties that stand out to me are Montgomery and Baltimore because they're the only ones in the 0.020 range while every other county is below that. This map is different from the first one because I decreased the values which gave me a different range and a different outcome for all of the counties in Maryland.
+
 ```{r}
 #Read data and calculate change of EV vehicles
-
+ev_data_2020_2023 <- read_csv("data/ev_2020_2023.csv") |>
+  clean_names() |>
+  mutate(percentage_change_ev = (march_2023-july_2020)/july_2020 *100)
 ```
 
 ```{r}
 #Merge geometries with EV data
+ev_data_geometry <- md_counties |>
+  inner_join(ev_data_2020_2023, by=c('NAME' = 'county'))
 
 ```
 
 ```{r}
 #Map out the change
+county_centroids <- st_centroid(md_counties)
+county_centroids_df <- as.data.frame(st_coordinates(county_centroids))
+county_centroids_df$NAME <- county_centroids$NAME
 
+ggplot() +
+  geom_sf(data= ev_data_geometry, aes(fill=percentage_change_ev)) + geom_text(aes(X, y = Y, label = NAME), data = county_centroids_df, size= 3, check_overlap = TRUE) +
+  theme_minimal() +
+  scale_fill_binned()
+```
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+library(sf)
+census_api_key("cf4c585b00f288248d418720b3eb3af218ddbad9",  install=TRUE) 
 ```
 
 ```{r}
 #Grab population data from Census
-
+md_county_population <- get_acs(geography = "county", 
+                                variables = c(population = "B01001_001"),
+                                year = 2021,
+                                state = "MD")
 ```
 
 ```{r}
 #Calculate per capita rate for March 2023
-
+ev_population_data <- ev_data_geometry |>
+  inner_join(md_county_population, by=c('GEOID' = 'GEOID')) |>
+  mutate(per_capita_ev_march = (march_2023 / estimate))
 ```
 
 ```{r}
 #Map out the per capita rate
-
+ggplot() +
+  geom_sf(data = ev_population_data, aes(fill=per_capita_ev_march)) +
+  theme_minimal() +
+  scale_fill_gradient2()
 ```
