@@ -11,7 +11,6 @@ combined_rosters <- bind_rows(list(wbb_rosters23, wbb_rosters24))
 
 # Data Exploration Section
 
-
 ## How many international players are on rosters?
 
 ```{r}
@@ -20,8 +19,6 @@ combined_rosters |>
   group_by(season) |> 
   summarize(count = n())
 ```
-
-
 
 ## Which countries outside the U.S. have supplied the most players?
 
@@ -54,6 +51,7 @@ non_us_team <- combined_rosters %>%
   mutate(total = `2022-23` + `2023-24`) |> 
   mutate(pct_change = (`2023-24` - `2022-23`)/`2022-23` *100)
 ```
+
 More than 25 teams have at least seven non-U.S. players on their rosters, South Florida has 12, San Francisco 10 and six teams have nine each (Simon Fraser has 14 but it is located in Canada).
 
 ```{r}
@@ -64,9 +62,7 @@ wbb_rosters24 %>%
   arrange(desc(count))
 ```
 
-
-
-Of the 95 teams that have at least one Australian player, 25 of them have two or more on their roster. Southern Nazarene WBB has _six_ Aussies.
+Of the 95 teams that have at least one Australian player, 25 of them have two or more on their roster. Southern Nazarene WBB has *six* Aussies.
 
 More than 130 teams have a Spanish player on the roster. Four teams have enough to field a starting five entirely from Spain.
 
@@ -85,9 +81,6 @@ wbb_rosters24 %>%
   arrange(desc(count))
 
 ```
-
-
-
 
 ## Which teams/conferences/divisions have the most first-year players? Which have the most seniors & graduate students?
 
@@ -112,6 +105,7 @@ division_seniors_grad <- wbb_rosters23 %>% filter(year_clean == "Senior" | year_
 ```
 
 #Data exploration: which teams/conferences/divisions have the most/least in-state players?
+
 ```{r}
 team_in_state_players_na <- wbb_rosters24  %>%
   group_by(team, team_state, state_clean, division, conference) %>%
@@ -154,9 +148,8 @@ wbb_rosters24 %>% group_by(team_state) %>% summarise(count = n_distinct(team)) %
 wbb_rosters24 %>% filter(is.na(team_state))
 ```
 
-In a lot of cases, we got NA as a result for the state_clean. In the cases of the DI schools, this meant that someone was an international player. 
+In a lot of cases, we got NA as a result for the state_clean. In the cases of the DI schools, this meant that someone was an international player.
 
 ```{r}
 no_hs <- wbb_rosters23 %>% filter(is.na(high_school), is.na(hs_clean), country_clean == 'USA')
 ```
-
