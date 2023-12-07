@@ -8,7 +8,17 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*.
 
 ```{r}
-plot(cars)
+library(tidyverse)
+library(janitor)
+
+roster_2020_21 <- read_csv("wbb_rosters_2020_21.csv")
+roster_2021_22 <- read_csv("wbb_rosters_2021_22.csv")
+roster_2022_23 <- read_csv("wbb_rosters_2022_23.csv")
+roster_2023_24 <- read_csv("wbb_rosters_2023_24.csv")
+old_years_cleaned <- read_csv("years_cleaned.csv")
+years_cleaned <- old_years_cleaned |>
+  group_by(`year-clean`) |> 
+  summarize(sum(count, na.rm = TRUE))
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
@@ -16,3 +26,63 @@ Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by press
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+```{r}
+players_by_state_2020_21 <- roster_2020_21 |>
+  group_by(state_clean) |>
+  summarize(
+    count_2020 = n()
+  ) |>
+  filter(state_clean != "NA")
+
+players_by_state_2021_22 <- roster_2021_22 |>
+  group_by(state_clean) |>
+  summarize(
+    count_2021 = n()
+  ) |>
+  filter(state_clean != "NA")
+
+players_by_state_2022_23 <- roster_2022_23 |>
+  group_by(state_clean) |>
+  summarize(
+    count_2022 = n()
+  ) |>
+  filter(state_clean != "NA", state_clean != "USVI")
+
+players_by_state_2023_24 <- roster_2023_24 |>
+  group_by(state_clean) |>
+  summarize(
+    count_2023 = n()
+  ) |>
+  filter(state_clean != "NA")
+
+players_change_over_time <- players_by_state_2020_21 |>
+  left_join(players_by_state_2021_22, by = "state_clean") |>
+  left_join(players_by_state_2022_23, by = "state_clean") |>
+  left_join(players_by_state_2023_24, by = "state_clean") |>
+  mutate(total_players = count_2020 + count_2021 + count_2022 + count_2023) |>
+  mutate(percentage_change = (count_2023 - count_2020)/count_2020*100) |>
+  arrange(desc(total_players))
+
+players_change_over_time
+```
+
+```{r}
+roster_2023_24 |>
+  filter(conference == 'Pac-12' | conference == 'SEC' | conference == 'Big 12' | conference == 'ACC' | conference == 'Big Ten') |>
+  group_by(team) |>
+  summarize(
+    total_players = n(),
+    total_height = sum(total_inches),
+    mean_total_inches = total_height/total_players
+  ) |>
+  arrange(desc(mean_total_inches))
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
