@@ -27,6 +27,10 @@ When you save the notebook, an HTML file containing the code and output will be 
 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
+\*\*Deliverable 3 Summary:\*\* So far, we have done analysis on the states that produce the most women's basketball players and the power 5 conference teams with the tallest teams for the current season. We found that Pennsylvania, Texas, and New York are the three states leading in terms of the number of players they produce. While Pennsylvania is not in the top slot for all four years we looked at, it is the state with the largest total overall and has a very low percent change between 2020 and 2023. Guam and the Virgin Islands have the lowest counts, which is not surprising considering these are small territories. In terms of our question on average height, the top five power 5 conference teams for this year are Texas, UCLA, Indiana, South Carolina, and Michigan.
+
+Our most newsworthy finding so far is that many of the leaders in terms of average height are also at the top of the list for most rebounds per game, as we found here: <https://www.ncaa.com/stats/basketball-women/d1/current/team/1015>. South Carolina is currently number one, and UCLA and Texas are both in the top 20. While all 64 teams within the five conferences had average heights that were between the small margin of 69 and 74 inches, this does suggest that even a few inches may make a big difference in this regard. We will continue to explore this more and also consider other team statistics that can be found on the NCAA's website.
+
 Question 1: What states produce the most D1 women's basketball players?
 
 A1: In this data, we found that PA, TX, and NY lead the nation in the the most players produced. PA is first, TX is second, and NY is third. MD ranks 16th on this list with 1390 players produced.
