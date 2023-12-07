@@ -87,9 +87,19 @@ roster_2023_24 |>
   arrange(desc(mean_total_inches))
 ```
 
+For question 3, we want to see percentage of freshmen, sophomores, juniors, seniors, redshirts, and grad students per each D1 team and how has it changed over time?
+
 ```{r}
 
 ```
+
+For question 4, we want to see which school took the most transfers and which school had the most players transfer out of their basketball programs.
+
+```{r}
+
+```
+
+For question 5, we want to see which teams have the most in-state players.
 
 ```{r}
 
