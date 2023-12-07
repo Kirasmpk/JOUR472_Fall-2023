@@ -67,6 +67,8 @@ players_change_over_time <- players_by_state_2020_21 |>
 players_change_over_time
 ```
 
+In this data, we found that PA, TX, and NY lead the nation in the the most players produced. PA is first, TX is second, and NY is third. MD ranks 16th on this list with 1390 players produced.
+
 ```{r}
 roster_2023_24 |>
   filter(conference == 'Pac-12' | conference == 'SEC' | conference == 'Big 12' | conference == 'ACC' | conference == 'Big Ten') |>
@@ -78,6 +80,8 @@ roster_2023_24 |>
   ) |>
   arrange(desc(mean_total_inches))
 ```
+
+Texas, UCLA, Indiana, South Carolina, Michigan, Missouri, Louisville, and Oregon State all are averaging players on their rosters with 73 inches. This is newsworthy because it shows that 8 teams are averaging players that are 6 feet tall.
 
 ```{r}
 
