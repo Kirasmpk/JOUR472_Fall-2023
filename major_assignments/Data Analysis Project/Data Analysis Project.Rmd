@@ -81,7 +81,7 @@ roster_2023_24 |>
   arrange(desc(mean_total_inches))
 ```
 
-Texas, UCLA, Indiana, South Carolina, Michigan, Missouri, Louisville, and Oregon State all are averaging players on their rosters with 73 inches. This is newsworthy because it shows that 8 teams are averaging players that are 6 feet tall.
+Texas, UCLA, Indiana, South Carolina, Michigan, Missouri, Louisville, and Oregon State all are averaging players on their rosters with 73 inches. This is newsworthy because it shows that 8 teams are averaging players that are 6 feet tall. I don't think that many people would've thought that 8 teams were averaging heights of 6 feel tall.
 
 ```{r}
 
