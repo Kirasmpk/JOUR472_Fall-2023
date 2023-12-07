@@ -27,6 +27,10 @@ When you save the notebook, an HTML file containing the code and output will be 
 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
+Question 1: What states produce the most D1 women's basketball players?
+
+A1: In this data, we found that PA, TX, and NY lead the nation in the the most players produced. PA is first, TX is second, and NY is third. MD ranks 16th on this list with 1390 players produced.
+
 ```{r}
 players_by_state_2020_21 <- roster_2020_21 |>
   group_by(state_clean) |>
@@ -67,7 +71,9 @@ players_change_over_time <- players_by_state_2020_21 |>
 players_change_over_time
 ```
 
-In this data, we found that PA, TX, and NY lead the nation in the the most players produced. PA is first, TX is second, and NY is third. MD ranks 16th on this list with 1390 players produced.
+Question 2: Which power 5 conferences have the tallest teams?
+
+A2: Texas, UCLA, Indiana, South Carolina, Michigan, Missouri, Louisville, and Oregon State all are averaging players on their rosters with 73 inches. This is newsworthy because it shows that 8 teams are averaging players that are 6 feet tall. I don't think that many people would've thought that 8 teams were averaging heights of 6 feel tall.
 
 ```{r}
 roster_2023_24 |>
@@ -80,8 +86,6 @@ roster_2023_24 |>
   ) |>
   arrange(desc(mean_total_inches))
 ```
-
-Texas, UCLA, Indiana, South Carolina, Michigan, Missouri, Louisville, and Oregon State all are averaging players on their rosters with 73 inches. This is newsworthy because it shows that 8 teams are averaging players that are 6 feet tall. I don't think that many people would've thought that 8 teams were averaging heights of 6 feel tall.
 
 ```{r}
 
