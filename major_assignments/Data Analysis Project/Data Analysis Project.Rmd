@@ -94,17 +94,51 @@ roster_2023_24 |>
 For question 3, we want to see percentage of freshmen, sophomores, juniors, seniors, redshirts, and grad students per each D1 team and how has it changed over time?
 
 ```{r}
+#group the dataframe by team and get a count of each year
+years_2023 <- roster_2023_24 |>
+  select(team, year_clean) |>
+  group_by(team, year_clean) |>
+  count()
 
+years_2023 <- years_2023 |>
+  pivot_wider(names_from = year_clean, values_from = n)
+
+years_2023[is.na(years_2023)] <- 0
+
+#add a column for redshirts
+redshirts <- rosters_2023_24 |>
+  select(team, redshirt) |>
+  filter(redshirt==1) |>
+  group_by(team) |>
+  summarize(redshirts = n())
+
+years_2023 <- years_2023 |>
+  left_join(redshirts, by="team") |>
+  clean_names()
+
+#mutate a total column as well as percent columns
+years_2023 <- years_2023 |>
+mutate(total = freshman+graduate_student+junior+senior+sophomore+fifth_year+na+sixth_year) |>
+  mutate(pct_redshirts = (redshirts/total)*100) |>
+  arrange(desc(pct_redshirts))
 ```
 
 For question 4, we want to see which school took the most transfers and which school had the most players transfer out of their basketball programs.
 
 ```{r}
 
+
 ```
 
 For question 5, we want to see which teams have the most in-state players.
 
 ```{r}
+
+in_state <- roster_2023_24 |>
+  filter(team_state == state_clean) 
+
+
+in_state |>
+  filter(conference == 'Pac-12' | conference == 'SEC' | conference == 'Big 12' | conference == 'ACC' | conference == 'Big Ten')
 
 ```
