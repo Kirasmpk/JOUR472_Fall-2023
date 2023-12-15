@@ -106,7 +106,7 @@ years_2023 <- years_2023 |>
 years_2023[is.na(years_2023)] <- 0
 
 #add a column for redshirts
-redshirts <- rosters_2023_24 |>
+redshirts <- roster_2023_24 |>
   select(team, redshirt) |>
   filter(redshirt==1) |>
   group_by(team) |>
