@@ -93,6 +93,8 @@ roster_2023_24 |>
 
 For question 3, we want to see percentage of freshmen, sophomores, juniors, seniors, redshirts, and grad students per each D1 team and how has it changed over time?
 
+Answer: To answer this question, we took the roster from the current season and grouped the different years to see the breakdown by team. We also used the redshirt column to identify the percentage of redshirt players from each team. Two teams have a lineup comprised of more than 60% redshirts, Grand Valley St. and North Carolina Central, both of which have 9 redshirts. Biola has the third highest percentage at 58.8%, but it has the highest raw number of redshirts at 10. Of the list of 932 teams, seven teams are 50% or more composed of redshirts. While this is not a particularly high number of teams, it could be interesting to explore why some teams are more than half redshirts.
+
 ```{r}
 #group the dataframe by team and get a count of each year
 years_2023 <- roster_2023_24 |>
@@ -125,21 +127,47 @@ mutate(total = freshman+graduate_student+junior+senior+sophomore+fifth_year+na+s
 
 For question 4, we want to see which school took the most transfers and which school had the most players transfer out of their basketball programs.
 
+Answer: Old Dominion and Glenville St. took in the most transfers at 14 each, with three people transferring out of Old Dominion and zero transferring out of Glenville St. Oregon, Arizona, and Blinn College had the most people transfer out, with nine people transferring out of Oregon and eight people each transferring out of Arizona and Blinn College. 806 schools received zero transfers, and 174 schools had zero people transfer out.
+
 ```{r}
 
+#filter for only the players with something in the previous_school column
+all_transfers_2023 <- roster_2023_24 |>
+  filter(!is.na(previous_school_clean))
+
+#create two different dataframes: one grouped by team and one grouped by previous_school
+current_team_transfers_grouped <- all_transfers_2023 |>
+  group_by(team) |>
+  summarize(transferred_in = n())
+
+previous_school_transfers_grouped <- all_transfers_2023 |>
+  group_by(previous_school_clean) |>
+  summarize(transferred_out = n()) |>
+  rename("team" = previous_school_clean)
+
+#combined the two dataframes
+combined_transfers_2023 <- full_join(current_team_transfers_grouped, previous_school_transfers_grouped, by = "team")
+
+combined_transfers_2023[is.na(combined_transfers_2023)] <- 0
 
 ```
 
 For question 5, we want to see which teams have the most in-state players.
 
+Answer: Looking again at only the rosters from the power-5 conferences, the schools with the most in-state players are Texas, Michigan State, and Minnesota, with nine players at Texas and eight players at both Michigan State and Minnesota. These results are quite interesting considering schools such as NC State, Rutgers, and Oregon State, all of which have a reputation for having a majority of in-state students, have less than three in-state players on their roster for this year. Of the 59 total teams, only 13 have five or more in-state players. This suggests that the teams from these conferences focus largely on out-of-state recruitment.
+
 ```{r}
 
-in_state <- roster_2023_24 |>
+#create a dataframe with only the rows where the team state and home state match
+in_state_players <- roster_2023_24 |>
   filter(team_state == state_clean) 
 
-
-in_state |>
-  filter(conference == 'Pac-12' | conference == 'SEC' | conference == 'Big 12' | conference == 'ACC' | conference == 'Big Ten')
+#filter for only the power 5 conferences and group by team to get a count of in state players
+in_state_players <- in_state_players |>
+  filter(conference == "SEC" | conference == "Big Ten" | conference == "ACC" | conference == "Big 12" | conference == "Pac-12") |>
+  group_by(team) |>
+  summarize(count=n()) |>
+  arrange(desc(count))
 
 
 
